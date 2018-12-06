@@ -73,7 +73,7 @@ mysql_install_datadir:
 {% else %}
     - name: mysql_install_db --user=mysql --basedir=/usr --datadir={{ mysql_datadir }}
 {% endif %}
-    - user: root
+    - runas: root
     - creates: {{ mysql_datadir }}/mysql/user.frm
     - env:
         - TMPDIR: '/tmp'
@@ -99,7 +99,7 @@ mysqld-packages:
 mysql_initialize:
   cmd.run:
     - name: mysqld --initialize-insecure --user=mysql --basedir=/usr --datadir={{ mysql_datadir }}
-    - user: root
+    - runas: root
     - creates: {{ mysql_datadir}}/mysql/
     - require:
       - pkg: {{ mysql.server }}
@@ -121,7 +121,7 @@ mysql_initialize:
 mysql_initialize:
   cmd.run:
     - name: emerge --config {{ mysql.server }}
-    - user: root
+    - runas: root
     - creates: {{ mysql_datadir}}/mysql/
     - require:
       - pkg: {{ mysql.server }}
