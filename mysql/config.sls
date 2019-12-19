@@ -79,5 +79,4 @@ mysql_config:
     {% if os_family in ['Debian', 'Gentoo', 'RedHat'] %}
     - user: root
     - group: root
-    - mode: 644
     {% endif %}
